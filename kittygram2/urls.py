@@ -1,15 +1,15 @@
-from rest_framework import routers
-
 from django.contrib import admin
 from django.urls import include, path
 
-from cats.views import AchivementViewSet, CatViewSet, UserViewSet
+from rest_framework import routers
+
+from cats.views import achievementViewSet, CatViewSet, UserViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'cats', CatViewSet)
 router.register(r'users', UserViewSet)
-router.register(r'achivements', AchivementViewSet)
+router.register(r'achievements', achievementViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

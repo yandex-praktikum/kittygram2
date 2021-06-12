@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
-from .models import achievement, Cat, User
+from .models import Achievement, Cat, User
 
-from .serializers import achievementSerializer, CatSerializer, UserSerializer
+from .serializers import AchievementSerializer, CatSerializer, UserSerializer
 
 
 class CatViewSet(viewsets.ModelViewSet):
@@ -16,5 +16,5 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class AchievementViewSet(viewsets.ModelViewSet):
-    queryset = achievement.objects.all()
-    serializer_class = achievementSerializer
+    queryset = Achievement.objects.all()
+    serializer_class = AchievementSerializer

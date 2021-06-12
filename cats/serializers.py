@@ -3,7 +3,7 @@ import datetime as dt
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
-from .models import CHOICES, achievement, achievementCat, Cat, User
+from .models import CHOICES, Achievement, AchievementCat, Cat, User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,16 +14,16 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name', 'cats')
 
 
-class achievementSerializer(serializers.ModelSerializer):
+class AchievementSerializer(serializers.ModelSerializer):
     achievement_name = serializers.CharField(source='name')
 
     class Meta:
-        model = achievement
+        model = Achievement
         fields = ('id', 'achievement_name')
 
 
 class CatSerializer(serializers.ModelSerializer):
-    achievements = achievementSerializer(many=True, required=False)
+    achievements = AchievementSerializer(many=True, required=False)
     color = serializers.ChoiceField(choices=CHOICES)
     age = serializers.SerializerMethodField()
     
@@ -45,6 +45,6 @@ class CatSerializer(serializers.ModelSerializer):
             for achievement in achievements:
                 current_achievement, status = achievement.objects.get_or_create(
                     **achievement)
-                achievementCat.objects.create(
+                AchievementCat.objects.create(
                     achievement=current_achievement, cat=cat)
             return cat

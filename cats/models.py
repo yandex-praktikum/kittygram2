@@ -12,7 +12,7 @@ CHOICES = (
 User = get_user_model()
 
 
-class achievement(models.Model):
+class Achievement(models.Model):
     name = models.CharField(max_length=64)
 
     def __str__(self):
@@ -25,14 +25,14 @@ class Cat(models.Model):
     birth_year = models.IntegerField()
     owner = models.ForeignKey(
         User, related_name='cats', on_delete=models.CASCADE)
-    achievements = models.ManyToManyField(achievement, through='achievementCat')
+    achievements = models.ManyToManyField(Achievement, through='AchievementCat')
 
     def __str__(self):
         return self.name
 
 
-class achievementCat(models.Model):
-    achievement = models.ForeignKey(achievement, on_delete=models.CASCADE)
+class AchievementCat(models.Model):
+    achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE)
     cat = models.ForeignKey(Cat, on_delete=models.CASCADE)
 
     def __str__(self):

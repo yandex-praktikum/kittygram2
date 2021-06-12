@@ -43,7 +43,7 @@ class CatSerializer(serializers.ModelSerializer):
             achievements = validated_data.pop('achievements')
             cat = Cat.objects.create(**validated_data)
             for achievement in achievements:
-                current_achievement, status = achievement.objects.get_or_create(
+                current_achievement, status = Achievement.objects.get_or_create(
                     **achievement)
                 AchievementCat.objects.create(
                     achievement=current_achievement, cat=cat)
